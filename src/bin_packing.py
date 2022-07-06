@@ -4,7 +4,7 @@ import json
 
 
 def bin_packing_handler(event, context):
-    data = json.load(event["body"])
+    data = json.loads(event["body"])
 
     # Create the mip solver with the SCIP backend.
     solver = pywraplp.Solver.CreateSolver('SCIP')
