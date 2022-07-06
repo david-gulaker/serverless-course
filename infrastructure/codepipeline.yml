@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  Region:
+    Description: The aws region where pipeline is hosted
+    Type: String
+    Default: eu-west-1
+
+Resources:
+  artifactBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: "sls-visma-course-david-bucket"
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
