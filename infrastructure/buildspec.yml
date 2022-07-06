@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+ pre_build:
+   commands:
+     - npm install
+     - npm install serverless
+     - npx serverless plugin install -n serverless-python-requirements
+ build:
+   commands:
+     - npx serverless deploy
+ post_build:
+   commands:
+     - echo Deployment successful
