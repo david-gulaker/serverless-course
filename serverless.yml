@@ -27,4 +27,18 @@ functions:
           path: /calculator
           method: put
           private: true
+  bin_packing:
+    handler: src.bin_packing.bin_packing_handler
+    events:
+      - http:
+          path: /bin_packing
+          method: post
+          private: true
 
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
