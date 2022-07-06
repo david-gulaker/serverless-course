@@ -133,3 +133,18 @@ Resources:
         Type: S3
         Location: !Ref artifactBucket
 
+  sourceWebHookBackend:
+    Type: 'AWS::CodePipeline::Webhook'
+    Properties:
+      AuthenticationConfiguration:
+        SecretToken: '{{resolve:secretsmanager:GITHUB_ACCESS_TOKEN:SecretString:GITHUB_ACCESS_TOKEN}}'
+      Filters:
+      - JsonPath: "$.ref"
+        MatchEquals: 'refs/heads/main'
+      Authentication: GITHUB_HMAC
+      TargetPipeline: !Ref slsBackendPipeline
+      TargetAction: SLS-Course
+      Name: "backendPipelineWebhook"
+      TargetPipelineVersion: !GetAtt slsBackendPipeline.Version
+      RegisterWithThirdParty: 'true'
+    DependsOn: slsBackendPipeline
