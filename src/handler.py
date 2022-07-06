@@ -45,7 +45,7 @@ def calculator(event, context):
         result = __calculate(calc)
         return {
             'statusCode': 200,
-            'body': json.dumps(result)
+            'body': json.dumps({"Result": result})
         }
     except:
         return {
